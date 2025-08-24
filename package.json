@@ -1,0 +1,31 @@
+{
+  "name": "vdub-dev-csv-preview-convert",
+  "version": "1.0.0",
+  "description": "A PHP library to preview and convert CSV files.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint:js": "./node_modules/.bin/eslint Resources/public/js",
+    "stylelint": "./node_modules/.bin/stylelint Resources/public/css --allow-empty-input"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentDubresson/captcha-handler.git"
+  },
+  "keywords": [
+    "captcha",
+    "custom",
+    "handler"
+  ],
+  "author": "Vincent Dubresson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vincentDubresson/captcha-handler/issues"
+  },
+  "homepage": "https://github.com/vincentDubresson/captcha-handler#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "eslint": "^9.33.0",
+    "globals": "^16.3.0",
+    "stylelint": "^16.23.1"
+  }
+}
