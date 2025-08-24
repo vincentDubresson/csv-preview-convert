@@ -1,6 +1,6 @@
 <?php
 
-use VdubDev\CaptchaHandler\TwigCs\CustomRuleset;
+use VdubDev\CsvPreviewConvert\TwigCs\CustomRuleset;
 
 return \FriendsOfTwig\Twigcs\Config\Config::create()
     ->setName('my-config')
