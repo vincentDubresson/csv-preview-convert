@@ -1,0 +1,40 @@
+{
+    "name": "vdub-dev/csv-preview-convert",
+    "description": "A PHP library to preview and convert CSV files.",
+    "keywords": ["csv", "preview", "convert", "symfony"],
+    "support": {
+      "issues": "https://github.com/vincentDubresson/csv-preview-convert/issues",
+      "source": "https://github.com/vincentDubresson/csv-preview-convert"
+    },
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VdubDev\\CsvPreviewConvert\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vincent Dubresson",
+            "email": "vincent.dubresson@orange.fr"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "symfony/http-foundation": "^6.4",
+        "symfony/config": "^6.4",
+        "symfony/dependency-injection": "^6.4",
+        "symfony/framework-bundle": "^6.4",
+        "symfony/routing": "^6.4",
+        "symfony/form": "^6.4",
+        "symfony/validator": "^6.4"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.85",
+        "friendsoftwig/twigcs": "^6.5",
+        "povils/phpmnd": "^3.6"
+    }
+}

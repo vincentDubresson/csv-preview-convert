@@ -1,0 +1,60 @@
+name: CI Checks
+
+on:
+  pull_request:
+    branches:
+      - '**'        # toutes les branches (PR vers n'importe quelle branche)
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, xml, curl, json
+          ini-values: memory_limit=512M
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: Composer Validate
+        run: composer validate --strict --ansi
+
+      - name: Composer Audit
+        run: composer audit
+
+      - name: PHPStan Analyse
+        run: vendor/bin/phpstan analyse src -vvv --no-progress --ansi --level=9 --memory-limit=512M
+
+      - name: PHP CS Fixer (dry-run)
+        run: vendor/bin/php-cs-fixer fix --using-cache=no -vvv --diff --ansi --dry-run
+
+      - name: Twig CS Lint
+        run: vendor/bin/twigcs Resources/views --ansi
+
+      - name: PHP Magic Numbers Detector
+        run: vendor/bin/phpmnd src
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: ESLint JS
+        run: npm run eslint:js
+
+      - name: Stylelint CSS/SCSS
+        run: npm run stylelint

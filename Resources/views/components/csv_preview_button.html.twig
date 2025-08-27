@@ -1,0 +1,16 @@
+{#
+Expected variables:
+- label: button text (optional, default = "Ouvrir la preview CSV")
+- class: additional CSS classes (optional)
+#}
+
+{% set buttonLabel = label|default('Ouvrir la preview CSV') %}
+{% set buttonClass = class|default('csv-preview-convert-btn-gray') %}
+
+<button
+        id="csv-preview-convert-open-popup"
+        data-url="{{ path('_csv_preview_convert_popup') }}"
+        class="{{ buttonClass }}"
+>
+    {{ buttonLabel }}
+</button>
