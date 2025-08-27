@@ -33,7 +33,7 @@ Create a file `config/routes/csv_preview_convert.yaml` :
 
 ```yaml
 csv_preview_convert:
-  resource: '../../vendor/vdub-dev/csv-preview-convert/Resources/config/routing/csvPreviewConvert.php'
+  resource: '../../vendor/vdub-dev/csv-preview-convert/Resources/config/routing/CsvPreviewConvert.php'
   type: php
 ```
 
@@ -94,7 +94,7 @@ Include the CSS assets directly in your Twig templates:
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/csvpreviewconvert/css/csvpreviewconvert.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/csvpreviewconvert/css/csv-preview-convert.css') }}">
 {% endblock %}
 
 {% block javascripts %}
@@ -112,6 +112,6 @@ Add dedicated button in the view that will render the csv preview convert popup:
 
 ```twig
 {% block body %}
-    {% include '@csvpreviewconvert/components/csv_preview_button.html.twig' %}
+    {% include '@CsvPreviewConvert/components/csv_preview_button.html.twig' %}
 {% endblock %}
 ```
