@@ -16,7 +16,7 @@ class CsvPreviewConvertController extends AbstractController
     {
         $form = $this->createForm(CsvImportType::class);
 
-        return $this->render('@csvimportconvert/csv_preview_convert_popup.html.twig', [
+        return $this->render('@CsvPreviewConvert/csv_preview_convert_popup.html.twig', [
             'form' => $form,
         ]);
     }
@@ -27,7 +27,7 @@ class CsvPreviewConvertController extends AbstractController
         $form = $this->createForm(CsvImportType::class);
         $form->handleRequest($request);
 
-        return $this->render('@csvimportconvert/includes/_csv_preview_convert_popup_content.html.twig', [
+        return $this->render('@CsvPreviewConvert/includes/_csv_preview_convert_popup_content.html.twig', [
             'form' => $form,
         ]);
     }

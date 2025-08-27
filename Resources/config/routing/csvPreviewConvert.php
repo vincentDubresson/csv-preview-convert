@@ -11,6 +11,6 @@ return function (RoutingConfigurator $routes) {
 
     $routes->add('_csv_preview_convert_preview', '/_csv_preview_convert_preview')
         ->controller([CsvPreviewConvertController::class, 'preview'])
-        ->methods(['GET'])
+        ->methods(['POST'])
     ;
 };
