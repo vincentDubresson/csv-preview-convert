@@ -1,9 +1,5 @@
-{# The button used to open this popup needs 'csv-preview-convert-open-popup' id #}
-{# ex: <button id="csv-preview-convert-open-popup">Open popup</button> #}
-
-<div id="csv-preview-convert--popup" class="csv-preview-convert-popup-overlay" style="display: none;">
+<div class="csv-preview-convert-popup-overlay">
     <div class="csv-preview-convert-popup-content">
-        {% include '@csvpreviewconvert/includes/_csv_preview.html.twig' %}
-        <button class="csv-preview-convert-btn-gray" id="csv-preview-convert-close-popup">Fermer</button>
+        {% include '@csvimportpreviewconvert/includes/_csv_preview_convert_popup_content.html.twig' %}
     </div>
 </div>

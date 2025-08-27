@@ -1,0 +1,41 @@
+<div class="csv-preview-convert-popup-content-container">
+    <div class="csv-preview-form-container">
+        {{ form_start(form, {
+            'attr': {'class': 'csv-preview-form', 'novalidate': 'novalidate'},
+            'action': path('_csv_preview_convert_preview')
+        }) }}
+
+        <div class="form-group">
+            {{ form_label(form.file, 'Sélectionnez votre fichier CSV', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="custom-file-upload">
+                {{ form_widget(form.file, {'attr': {'class': 'form-input-hidden'}}) }}
+                <button type="button" class="btn-browse">Parcourir</button>
+                <span class="file-name">Aucun fichier sélectionné</span>
+            </div>
+            <small class="form-hint">Formats autorisés : .csv (max 10 Mo)</small>
+            <div class="form-error">
+                {{ form_errors(form.file) }}
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">⬆ Importer & Prévisualiser</button>
+
+        {{ form_end(form) }}
+    </div>
+
+    {% if preview is defined and preview is not empty %}
+        <div class="csv-preview-container">
+            <table>
+                {% for row in preview %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+
+    <button class="csv-preview-convert-btn-gray" id="csv-preview-convert-close-popup">Fermer</button>
+</div>

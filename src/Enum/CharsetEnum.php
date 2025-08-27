@@ -1,6 +1,6 @@
 <?php
 
-namespace VdubDev\CsvPreviewConvert;
+namespace VdubDev\CsvPreviewConvert\Enum;
 
 /**
  * Enum representing character encodings.
@@ -43,7 +43,6 @@ enum CharsetEnum: string
     public static function choices(): array
     {
         $choices = [];
-
         foreach (self::cases() as $case) {
             $choices[$case->label()] = $case;
         }

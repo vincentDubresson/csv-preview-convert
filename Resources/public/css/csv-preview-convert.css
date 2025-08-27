@@ -1,3 +1,4 @@
+/** ----- POPUP ----- */
 .csv-preview-convert-btn-gray {
     background-color: #e5e7eb;
     color: #1f2937;
@@ -20,12 +21,106 @@
     width: 100%;
     height: 100%;
     background: rgb(0 0 0 / 50%);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
+.csv-preview-convert-popup-content-container {
+    display:flex;
+    flex-direction:column;
+    gap:1.5rem;
+}
+
+/** ----- FORM ----- */
+.csv-preview-form-container {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+    font-family: system-ui, sans-serif;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.csv-preview-form-container .form-group {
+    margin-bottom: 1rem;
+}
+
+.csv-preview-form-container .form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+    color: #1f2937;
+}
+
+.csv-preview-form-container .form-input-hidden {
+    display: none;
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-browse {
+    padding: 0.5rem 1rem;
+    background-color: #07c;
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-browse:hover {
+    background-color: #005fa3;
+}
+
+.file-name {
+    font-size: 0.95rem;
+    color: #1f2937;
+    font-style: italic;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.csv-preview-form-container .form-hint {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.csv-preview-form-container .form-error {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 600;
+}
+
+.csv-preview-form-container .btn-submit {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    background-color: #e5e7eb;
+    color: #1f2937;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.csv-preview-form-container .btn-submit:hover {
+    background-color: #d1d5db;
+}
+
+/** ----- PREVIEW CONTENT ----- */
 .csv-preview-convert-popup-content {
     background: white;
     padding: 2rem;

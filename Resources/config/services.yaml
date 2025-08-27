@@ -1,0 +1,5 @@
+services:
+    VdubDev\CsvPreviewConvert\Controller\CsvPreviewConvertController:
+      public: true
+      autowire: true
+      autoconfigure: true
