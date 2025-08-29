@@ -12,6 +12,14 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+/**
+ * Form type for importing a CSV file.
+ *
+ * This form provides a single 'file' field allowing users to upload a CSV file.
+ * It includes validation for required field, file size, MIME type, and file extension.
+ *
+ * CSRF protection is enabled to prevent cross-site request forgery.
+ */
 class CsvImportType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -52,7 +60,9 @@ class CsvImportType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'csrf_protection' => false,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'csv_preview',
         ]);
     }
 }
