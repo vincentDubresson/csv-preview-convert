@@ -2,7 +2,6 @@
 
 namespace VdubDev\CsvPreviewConvert\Enum;
 
-
 /**
  * Enum representing character encodings.
  *
