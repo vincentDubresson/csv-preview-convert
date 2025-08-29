@@ -2,6 +2,7 @@
 
 namespace VdubDev\CsvPreviewConvert\Enum;
 
+
 /**
  * Enum representing character encodings.
  *
@@ -10,10 +11,10 @@ namespace VdubDev\CsvPreviewConvert\Enum;
  */
 enum CharsetEnum: string
 {
-    case UTF_8 = 'utf-8';
-    case WINDOWS_1252 = 'windows-1252';
-    case ISO_8859_1 = 'iso-8859-1';
-    case ISO_8859_15 = 'iso-8859-15';
+    case UTF_8 = 'UTF-8';
+    case WINDOWS_1252 = 'Windows-1252';
+    case ISO_8859_15 = 'ISO-8859-15';
+    case ISO_8859_1 = 'ISO-8859-1';
 
     /**
      * Returns a human-readable label for the encoding.
@@ -21,10 +22,10 @@ enum CharsetEnum: string
     public function label(): string
     {
         return match ($this) {
-            self::UTF_8 => 'UTF-8',
-            self::WINDOWS_1252 => 'Windows 1252',
-            self::ISO_8859_1 => 'ISO-8859-1',
-            self::ISO_8859_15 => 'ISO-8859-15',
+            self::UTF_8 => '1. UTF-8',
+            self::WINDOWS_1252 => '2. Windows-1252',
+            self::ISO_8859_15 => '3. ISO-8859-15',
+            self::ISO_8859_1 => '4. ISO-8859-1',
         };
     }
 
@@ -48,5 +49,21 @@ enum CharsetEnum: string
         }
 
         return $choices;
+    }
+
+    /**
+     * Returns true if the given encoding string is a valid enum value.
+     */
+    public static function isValid(string $encoding): bool
+    {
+        return in_array($encoding, array_map(fn ($case) => $case->value, self::cases()), true);
+    }
+
+    /**
+     * Returns a valid CharsetEnum value; defaults to UTF-8 if invalid.
+     */
+    public static function normalize(string $encoding): string
+    {
+        return self::isValid($encoding) ? $encoding : self::UTF_8->value;
     }
 }
