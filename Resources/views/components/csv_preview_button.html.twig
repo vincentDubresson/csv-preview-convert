@@ -1,15 +1,15 @@
 {#
 Expected variables:
-- label: button text (optional, default = "Ouvrir la preview CSV")
+- label: button text (optional, default = "Vérifier l'encodage d'un fichier CSV")
 - class: additional CSS classes (optional)
 #}
 
-{% set buttonLabel = label|default('Ouvrir la preview CSV') %}
+{% set buttonLabel = label|default("Vérifier l'encodage d'un fichier CSV") %}
 {% set buttonClass = class|default('csv-preview-convert-btn-gray') %}
 
 <button
         id="csv-preview-convert-open-popup"
-        data-url="{{ path('_csv_preview_convert_popup') }}"
+        data-url="{{ path('csv_preview_popup') }}"
         class="{{ buttonClass }}"
 >
     {{ buttonLabel }}

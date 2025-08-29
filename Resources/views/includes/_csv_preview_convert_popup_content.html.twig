@@ -1,8 +1,9 @@
 <div class="csv-preview-convert-popup-content-container">
+    {% if canGeneratePreview is not defined or canGeneratePreview is same as false %}
     <div class="csv-preview-form-container">
         {{ form_start(form, {
-            'attr': {'class': 'csv-preview-form', 'novalidate': 'novalidate'},
-            'action': path('_csv_preview_convert_preview')
+            'attr': {'class': 'csv-preview-import-form', 'novalidate': 'novalidate'},
+            'action': path('csv_preview_submit')
         }) }}
 
         <div class="form-group">
@@ -14,6 +15,7 @@
             </div>
             <small class="form-hint">Formats autorisés : .csv (max 10 Mo)</small>
             <div class="form-error">
+                {{ form_errors(form) }}
                 {{ form_errors(form.file) }}
             </div>
         </div>
@@ -22,18 +24,61 @@
 
         {{ form_end(form) }}
     </div>
+    {% endif %}
 
-    {% if preview is defined and preview is not empty %}
+    {% if canGeneratePreview is defined and canGeneratePreview is same as true %}
         <div class="csv-preview-container">
-            <table>
-                {% for row in preview %}
-                    <tr>
-                        {% for cell in row %}
-                            <td>{{ cell }}</td>
+
+            <div class="csv-encoding-advice">
+                <strong>💡 Conseils sur l’encodage :</strong>
+                <p>Plusieurs encodages peuvent sembler corrects dans l’aperçu, car votre navigateur peut corriger certains caractères automatiquement.</p>
+                <p>Nous vous recommandons de tester les encodages suivants dans cet ordre :</p>
+                <ol>
+                    <li>1. UTF-8 (plus compatible et moderne)</li>
+                    <li>2. Windows-1252 (standard Excel Windows)</li>
+                    <li>3. ISO-8859-15 (inclut € et certains caractères européens)</li>
+                    <li>4. ISO-8859-1 (moins sûr pour certains caractères spéciaux et de potentielles corrections automatiques du navigateur)</li>
+                </ol>
+                <p>Dès qu’un encodage affiche correctement tous les caractères spéciaux, vous pouvez vous arrêter et ne pas tester les suivants.</p>
+                <p><strong>⚠ Attention :</strong> si aucun encodage n’affiche correctement les caractères spéciaux, vous devrez convertir votre fichier CSV avec un outil externe avant de l’importer. Cela peut être fait via un éditeur de texte ou un logiciel de conversion d’encodage.</p>
+            </div>
+
+            <form action="{{ path('csv_preview_convert_and_download') }}" class="csv-preview-export-form" method="POST" target="_blank">
+                <div class="csv-preview-toolbar">
+                    <label for="encoding">Encodage d'entrée :</label>
+                    <select id="encoding" name="encoding" class="encoding-select">
+                        {% for case in encodings %}
+                            <option value="{{ case.value }}" {% if case.value is same as selectedEncoding %}selected{% endif %}>{{ case.label() }}</option>
                         {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
+                    </select>
+                </div>
+
+                <iframe
+                        src="{{ path('csv_preview_content', {'encoding': selectedEncoding}) }}"
+                        style="width:100%; height:250px;">
+                </iframe>
+
+                <div class="csv-convert-action">
+                    <div class="csv-output-encoding">
+                        <label for="output_encoding">Encodage de sortie :</label>
+                        <select id="output_encoding" name="output_encoding" class="encoding-select">
+                            {% for case in encodings %}
+                                <option value="{{ case.value }}">{{ case.label() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <p>
+                        Une fois que vous avez choisi l’encodage de sortie souhaité pour votre fichier CSV, cliquez sur le bouton ci-dessous
+                        pour <strong>convertir et télécharger le fichier</strong> avec cet encodage.
+                    </p>
+                    <input type="hidden" name="_token" value="{{ csrf_token('csv-convert-download') }}">
+
+                    <button type="submit" class="csv-preview-convert-convert-btn">Convertir et télécharger le fichier</button>
+                    <p class="csv-convert-download-error"></p>
+                </div>
+            </form>
+
         </div>
     {% endif %}
 

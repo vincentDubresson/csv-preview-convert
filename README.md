@@ -115,3 +115,58 @@ Add dedicated button in the view that will render the csv preview convert popup:
     {% include '@CsvPreviewConvert/components/csv_preview_button.html.twig' %}
 {% endblock %}
 ```
+
+---
+
+## 🛡️ Security configuration
+
+To display the CSV preview inside an iframe, you have two options:
+
+### Option 1 — NelmioSecurityBundle Configuration (Recommended)
+
+```yaml
+nelmio_security:
+  clickjacking:
+    paths:
+      '^/csv-preview-content': ALLOW
+
+  csp:
+    enforce:
+      frame-ancestors:
+        - 'self'
+      frame-src:
+        - 'self'
+```
+
+**Explanation:**
+
+- `frame-ancestors 'self'` → allows only your site to embed the page in an iframe.
+- `frame-src 'self'` → allows iframes on your site to load resources from your own domain.
+- `clickjacking.paths` → disables clickjacking protection for this route.
+
+---
+
+### Option 2 — Parent Page Headers (Alternative)
+
+If you cannot use NelmioSecurityBundle, you can set CSP headers on the **parent page that contains the popup and iframe**:
+
+```php
+$response = $this->render('parent_page_with_popup.html.twig', $data);
+
+$response->headers->set(
+    'Content-Security-Policy',
+    "default-src 'self'; frame-src 'self'; frame-ancestors 'self';"
+);
+
+return $response;
+```
+
+**Important Notes:**
+
+- This only works when you control the parent page; you cannot modify the vendor controller.
+- Using `$response->headers->set()` **overwrites any existing header of the same type**.
+    - If another CSP is already set, it will be replaced.
+    - To merge headers, you must retrieve existing values and append manually.
+
+---
+

@@ -3,3 +3,18 @@ services:
       public: true
       autowire: true
       autoconfigure: true
+
+    VdubDev\CsvPreviewConvert\Service\CsvPreviewConvertManager:
+      arguments:
+        $tmpDir: '%kernel.project_dir%/var/tmp/CsvPreviewConvert'
+        $lifetime: 1800
+      public: true
+      autowire: true
+      autoconfigure: true
+
+    VdubDev\CsvPreviewConvert\Service\CsvPreviewConvertSessionManager:
+      arguments:
+        $tmpDir: '%kernel.project_dir%/var/tmp/CsvPreviewConvert'
+      public: true
+      autowire: true
+      autoconfigure: true

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="{{ selectedEncoding }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="{{ asset('bundles/csvpreviewconvert/css/csv-preview-convert.css') }}">
+</head>
+<body>
+{% block body %}
+    <table class="csv-table">
+        <tbody>
+        {% for row in preview.preview_data %}
+            <tr>
+                <td class="row-index">{{ row.line_number }}</td>
+                {% for cell in row.display_line %}
+                    <td title="{{ cell|raw }}">{{ cell|raw }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+</body>
+</html>
