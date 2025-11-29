@@ -61,7 +61,7 @@ public/bundles/csvpreviewconvert
 <?php
 
 return [
-    VdubDev\CaptchaHandler\CsvPreviewConvert::class => ['all' => true],
+    VdubDev\CsvPreviewConvert\CsvPreviewConvert::class => ['all' => true],
 ];
 ```
 
